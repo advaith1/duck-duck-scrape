@@ -118,7 +118,7 @@ module.exports = class DDG {
    * @param {string} locale - The locale to search in
    * @returns {Promise<Array<SearchResult>>} - The results of your query
    */
-  async search(query, safeSearch = -2, locale = 'us-en') {
+  async search(query, safeSearch, locale) {
     const response = await sf.get(`https://duckduckgo.com/html/?q=${this._format(query)}&kr=${locale}&kp=${safeSearch}`)
     const $ = cheerio.load(response.text)
     let results = Array.from($('.results_links_deep:not(.result--ad) .result__body')).map(result => ({
